@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101020">
+  <title>PPSSPP Games Store Tanzania</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101020;
+      color: white;
+    }
+    header {
+      padding: 20px;
+      background: #191932;
+      border-bottom: 1px solid #34345a;
+    }
+    .logo { font-size: 23px; font-weight: bold; }
+    .logo span { color: #a78bfa; }
+    .hero {
+      padding: 36px 20px;
+      text-align: center;
+      background: linear-gradient(135deg,#27205a,#101020);
+    }
+    .hero h1 { font-size: 32px; margin-bottom: 10px; }
+    .hero p { color: #c8c8dc; line-height: 1.6; }
+    .search {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #424266;
+      background: #191932;
+      color: white;
+      margin-top: 14px;
+    }
+    main { padding: 20px; max-width: 1000px; margin: auto; }
+    .games {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 14px;
+    }
+    .game {
+      background: #1b1b35;
+      border: 1px solid #343450;
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .cover {
+      height: 110px;
+      border-radius: 10px;
+      background: linear-gradient(135deg,#6335a8,#1d5d8c);
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+    }
+    .game h3 { font-size: 16px; }
+    .game p { color: #bcbcd2; font-size: 13px; }
+    .price { color: #a78bfa; font-weight: bold; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      background: #7950e8;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    footer { padding: 25px; text-align: center; color: #aaa; }
+    @media(min-width:650px) {
+      .games { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">JWALKER <span>GAMES</span></div>
+    <small>PPSSPP Games Store Tanzania</small>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome Gamer 🎮</h1>
+    <p>Tafuta games za PSP na homebrew
+      zinazopatikana kwa usambazaji halali.</p>
+    <input id="search" class="search"
+      placeholder="Tafuta game..."
+      oninput="filterGames()">
+  </section>
+
+  <main>
+    <h2>Games Collection</h2>
+    <div class="games" id="games"></div>
+  </main>
+
+  <footer>
+    <p>© 2026 Jwalker Games</p>
+    <p>Games za homebrew na maudhui yaliyoidhinishwa.</p>
+  </footer>
+
+  <script>
+    const catalog = [
+      { name: "Homebrew Adventure",
+        type: "Adventure", price: "Bure", icon: "🗺️" },
+      { name: "Retro Racing Demo",
+        type: "Racing", price: "Bure", icon: "🏎️" },
+      { name: "Pixel Fighter",
+        type: "Fighting", price: "Bure", icon: "🥊" },
+      { name: "Space Explorer",
+        type: "Action", price: "Bure", icon: "🚀" }
+    ];
+
+    function filterGames() {
+      const term = document.getElementById("search")
+        .value.toLowerCase();
+
+      const results = catalog.filter(game =>
+        game.name.toLowerCase().includes(term) ||
+        game.type.toLowerCase().includes(term)
+      );
+
+      document.getElementById("games").innerHTML =
+        results.map(game => `
+          <article class="game">
+            <div class="cover">${game.icon}</div>
+            <h3>${game.name}</h3>
+            <p>${game.type}</p>
+            <p class="price">${game.price}</p>
+            <button class="btn"
+              onclick="alert('Download itaongezwa baada ya kuunganisha faili halisi.')">
+              Angalia game
+            </button>
+          </article>
+        `).join("");
+    }
+
+    filterGames();
+  </script>
+</body>
+</html>
